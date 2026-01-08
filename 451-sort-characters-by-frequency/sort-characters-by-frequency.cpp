@@ -1,34 +1,23 @@
 class Solution {
-private:
-    static bool comparator(pair<int, char> p1, pair<int, char> p2) {
-        if (p1.first > p2.first) return true;
-        if (p1.first < p2.first) return false;
-        return p1.second < p2.second;
-    }
-
 public:
     string frequencySort(string s) {
-        pair<int, char> freq[256];
-
-        // initialize
-        for (int i = 0; i < 256; i++) {
-            freq[i] = {0, char(i)};
+        unordered_map<char, int> freq;
+        for (char c : s) {
+            freq[c]++;
+        }
+        vector<pair<int, char>> v;
+        for (auto it : freq) {
+            v.push_back({it.second, it.first});
         }
 
-        // count frequency
-        for (char ch : s) {
-            freq[(unsigned char)ch].first++;
+        sort(v.begin(), v.end(), greater<>());
+        string result = "";
+        for (auto p : v) {
+            result += string(p.first, p.second);
         }
 
-        // sort
-        sort(freq, freq + 256, comparator);
-
-        // build result
-        string ans = "";
-        for (int i = 0; i < 256; i++) {
-            ans += string(freq[i].first, freq[i].second);
-        }
-
-        return ans;
+        return result;
+        
+        
     }
 };
