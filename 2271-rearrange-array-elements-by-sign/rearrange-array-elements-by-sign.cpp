@@ -12,9 +12,8 @@ public:
             else{
                 ans[posInd] = nums[i];
                 posInd += 2;
-            }
+           }
         }
-        nums = ans;
         return ans;
     }
 };
