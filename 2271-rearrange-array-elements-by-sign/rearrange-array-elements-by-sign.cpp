@@ -14,6 +14,7 @@ public:
                 posInd += 2;
             }
         }
+        nums = ans;
         return ans;
     }
 };
