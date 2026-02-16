@@ -19,6 +19,7 @@ public:
             if(isVowel(s[i])) count++;
 
             maxV = max(maxV, count);
+            if(maxV==k) return k;
         }
         return maxV;
     }
