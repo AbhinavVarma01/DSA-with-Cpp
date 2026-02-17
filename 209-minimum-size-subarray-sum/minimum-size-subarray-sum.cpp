@@ -9,8 +9,8 @@ public:
             len+= nums[r];
 
             while(len >= target){
-                minLen = min(minLen, r-l+1);
                 len-=nums[l];
+                minLen = min(minLen, r-l+1);
                 l++;
             }
             r++;
