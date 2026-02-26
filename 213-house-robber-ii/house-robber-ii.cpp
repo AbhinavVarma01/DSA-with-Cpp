@@ -12,12 +12,8 @@ public:
     int rob(vector<int>& nums) {
         int n = nums.size();
         if(n==1) return nums[0];
-        vector<int> vct1;
-        vector<int> vct2;
-        for(int i=0; i<n; i++){
-            if(i!=0) vct1.push_back(nums[i]);
-            if(i!=n-1) vct2.push_back(nums[i]);
-        }
+        vector<int> vct1(nums.begin()+1, nums.end());
+        vector<int> vct2(nums.begin(), nums.end()-1);
         vector<int> dp1(vct1.size(), -1);
         vector<int> dp2(vct2.size(), -1);
         return max(func(vct1.size()-1,vct1,dp1), func(vct2.size()-1,vct2,dp2));
