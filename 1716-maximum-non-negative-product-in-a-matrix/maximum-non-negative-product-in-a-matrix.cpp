@@ -1,40 +1,22 @@
 class Solution {
 public:
+    long long picker(int n, int m, long long prod, vector<vector<int>>& grid) {
+        if (n == 0 && m == 0) return prod * grid[0][0];
+        if (prod == 0) return 0;
+
+        long long up = (n != 0) ? picker(n - 1, m, prod * grid[n][m], grid) : LLONG_MIN;
+        long long left = (m != 0) ? picker(n, m - 1, prod * grid[n][m], grid) : LLONG_MIN;
+
+        return max(up, left);
+    }
+
     int maxProductPath(vector<vector<int>>& grid) {
-        int rows = grid.size(), cols = grid[0].size();
-        const long long MOD = 1e9 + 7;
+        int n = grid.size();
+        int m = grid[0].size();
 
-        vector<long long> maxProd(cols), minProd(cols);
+        long long ans = picker(n - 1, m - 1, 1, grid);
 
-        maxProd[0] = minProd[0] = grid[0][0];
-
-        for (int col = 1; col < cols; col++) {
-            maxProd[col] = minProd[col] = maxProd[col - 1] * grid[0][col];
-        }
-
-        for (int row = 1; row < rows; row++) {
-
-            maxProd[0] = minProd[0] = maxProd[0] * grid[row][0];
-
-            for (int col = 1; col < cols; col++) {
-                long long val = grid[row][col];
-
-                long long topMax = maxProd[col] * val;
-                long long topMin = minProd[col] * val;
-
-                long long leftMax = maxProd[col - 1] * val;
-                long long leftMin = minProd[col - 1] * val;
-
-                long long currMax = max({topMax, topMin, leftMax, leftMin});
-                long long currMin = min({topMax, topMin, leftMax, leftMin});
-
-                maxProd[col] = currMax;
-                minProd[col] = currMin;
-            }
-        }
-
-        long long result = maxProd[cols - 1];
-        if (result < 0) return -1;
-        return result % MOD;
+        if (ans < 0) return -1;
+        return ans % 1000000007;
     }
 };
