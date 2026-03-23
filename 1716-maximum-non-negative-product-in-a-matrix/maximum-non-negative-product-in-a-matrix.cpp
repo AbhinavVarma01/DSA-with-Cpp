@@ -1,38 +1,40 @@
 class Solution {
 public:
     int maxProductPath(vector<vector<int>>& grid) {
-        int m = grid.size(), n = grid[0].size();
+        int rows = grid.size(), cols = grid[0].size();
         const long long MOD = 1e9 + 7;
 
-        vector<vector<long long>> maxDp(m, vector<long long>(n));
-        vector<vector<long long>> minDp(m, vector<long long>(n));
+        vector<long long> maxProd(cols), minProd(cols);
 
-        maxDp[0][0] = minDp[0][0] = grid[0][0];
+        maxProd[0] = minProd[0] = grid[0][0];
 
-        for (int i = 1; i < m; i++) {
-            maxDp[i][0] = minDp[i][0] = maxDp[i-1][0] * grid[i][0];
+        for (int col = 1; col < cols; col++) {
+            maxProd[col] = minProd[col] = maxProd[col - 1] * grid[0][col];
         }
 
-        for (int j = 1; j < n; j++) {
-            maxDp[0][j] = minDp[0][j] = maxDp[0][j-1] * grid[0][j];
-        }
+        for (int row = 1; row < rows; row++) {
 
-        for (int i = 1; i < m; i++) {
-            for (int j = 1; j < n; j++) {
-                long long val = grid[i][j];
+            maxProd[0] = minProd[0] = maxProd[0] * grid[row][0];
 
-                long long a = maxDp[i-1][j] * val;
-                long long b = minDp[i-1][j] * val;
-                long long c = maxDp[i][j-1] * val;
-                long long d = minDp[i][j-1] * val;
+            for (int col = 1; col < cols; col++) {
+                long long val = grid[row][col];
 
-                maxDp[i][j] = max({a, b, c, d});
-                minDp[i][j] = min({a, b, c, d});
+                long long topMax = maxProd[col] * val;
+                long long topMin = minProd[col] * val;
+
+                long long leftMax = maxProd[col - 1] * val;
+                long long leftMin = minProd[col - 1] * val;
+
+                long long currMax = max({topMax, topMin, leftMax, leftMin});
+                long long currMin = min({topMax, topMin, leftMax, leftMin});
+
+                maxProd[col] = currMax;
+                minProd[col] = currMin;
             }
         }
 
-        long long res = maxDp[m-1][n-1];
-        if (res < 0) return -1;
-        return res % MOD;
+        long long result = maxProd[cols - 1];
+        if (result < 0) return -1;
+        return result % MOD;
     }
 };
