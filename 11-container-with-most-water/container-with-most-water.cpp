@@ -4,14 +4,12 @@ public:
         int n = height.size();
         int left = 0;
         int right = n-1;
-        int maxWater = 0;
+        int area = 0;
         while(left<right){
-            int area = min(height[left], height[right]) * (right - left);
-            maxWater = max(maxWater, area);
-
+            area = max(area, (right - left) * min(height[left], height[right]));
             if(height[left]<height[right]) left++;
             else right--;
         }
-        return maxWater;
+        return area;
     }
 };
