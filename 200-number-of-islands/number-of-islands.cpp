@@ -13,7 +13,6 @@ public:
         dfs(i-1,j,grid);
         dfs(i,j+1,grid);
         dfs(i,j-1,grid);
-
     }
 
     int numIslands(vector<vector<char>>& grid) {
