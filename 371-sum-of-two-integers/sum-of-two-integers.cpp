@@ -1,9 +1,11 @@
 class Solution {
 public:
     int getSum(int a, int b) {
-        int x = a;
-        int y = b;
-        int sol = x + y;
-        return sol;
+        while(b != 0){
+            int c = (a & b);
+            a = a ^ b;     
+            b = c << 1;
+        }
+    return a;
     }
 };
