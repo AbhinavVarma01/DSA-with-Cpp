@@ -7,10 +7,8 @@ public:
         for(int i=0; i<n; i++){
             int num = nums[i];
             int needed = target - num;
-            
-            if(mpp.find(needed)!= mpp.end()){
-                return {mpp[needed], i};
-            }
+
+            if(mpp.find(needed)!= mpp.end()) return {mpp[needed], i};
 
             mpp[num] = i;
         }
