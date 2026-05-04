@@ -7,10 +7,11 @@ public:
 
         while(mid<=high){
             if(nums[mid]==0){
-                swap(nums[mid], nums[low]);
+                swap(nums[low], nums[mid]);
                 mid++;
                 low++;
             }
+
             else if(nums[mid]==1) mid++;
 
             else{
