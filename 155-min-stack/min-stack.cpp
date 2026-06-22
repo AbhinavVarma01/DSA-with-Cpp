@@ -5,8 +5,8 @@ public:
     MinStack(){}
 
     void push(int value) {
-        if(st.empty()) st.push({value, value});
-        else st.push({value, min(value, st.top().second)});        
+        if(!st.empty()) st.push({value, min(value, st.top().second)}); 
+        else st.push({value, value});      
     }
     
     void pop() {
