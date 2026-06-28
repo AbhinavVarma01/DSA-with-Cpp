@@ -1,4 +1,4 @@
-SELECT p.product_id, p.product_name
+SELECT distinct p.product_id, p.product_name
 FROM Product p
 JOIN Sales s
 ON p.product_id = s.product_id
