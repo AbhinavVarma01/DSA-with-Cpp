@@ -39,7 +39,6 @@ private:
         }
     }
 
-    // Merge Sort + Counting Reverse Pairs
     int mergeSort(vector<int>& nums, int low, int high) {
         if (low >= high) return 0;
 
