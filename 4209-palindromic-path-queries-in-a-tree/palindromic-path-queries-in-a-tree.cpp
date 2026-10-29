@@ -71,7 +71,6 @@ public:
             return res;
         };
 
-        // Find Lowest Common Ancestor
         auto lca = [&](int u, int v) {
             if (depth[u] < depth[v]) swap(u, v);
 
