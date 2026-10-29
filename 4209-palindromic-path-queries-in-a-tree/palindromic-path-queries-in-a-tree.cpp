@@ -107,8 +107,6 @@ public:
                 ss >> c;
 
                 int change = getMask(s[u]) ^ getMask(c);
-
-                // Update all prefixes in u's subtree
                 add(tin[u], change);
                 add(tout[u] + 1, change);
 
